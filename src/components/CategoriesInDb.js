@@ -1,6 +1,16 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 
 function CategoriesInDb() {
+    const [categories, setCategories] = useState([]);
+
+    useEffect(() => {
+        fetch('http://localhost:3000/api/products').then((response) =>
+            response.json().then((data) => {
+                setCategories(data.data.countByCategory);
+            })
+        );
+    }, []);
+
     return (
         <div className="col-lg-6 mb-4">
             <div className="card shadow mb-4">
@@ -11,26 +21,26 @@ function CategoriesInDb() {
                     <div className="row">
                         <div className="col-lg-6 mb-4">
                             <div className="card bg-dark text-white shadow text-center">
-                                <div className="card-body">Remeras</div>
-                                <div className="card-subtitle mb-2 text-muted">Cantidad: 30</div>
+                                <div className="card-body">{Object.keys(categories)[0]}</div>
+                                <div className="card-subtitle mb-2 text-muted"> Cantidad: {Object.values(categories)[0]}</div>
                             </div>
                         </div>
                         <div className="col-lg-6 mb-4">
                             <div className="card bg-dark text-white shadow text-center">
-                                <div className="card-body">Pantalones</div>
-                                <div className="card-subtitle mb-2 text-muted">Cantidad: 40</div>
+                                <div className="card-body">{Object.keys(categories)[1]}</div>
+                                <div className="card-subtitle mb-2 text-muted">Cantidad: {Object.values(categories)[1]}</div>
                             </div>
                         </div>
                         <div className="col-lg-6 mb-4">
                             <div className="card bg-dark text-white shadow text-center">
-                                <div className="card-body">Gorras</div>
-                                <div className="card-subtitle mb-2 text-muted">Cantidad: 70</div>
+                                <div className="card-body">{Object.keys(categories)[2]}</div>
+                                <div className="card-subtitle mb-2 text-muted">Cantidad: {Object.values(categories)[2]}</div>
                             </div>
                         </div>
                         <div className="col-lg-6 mb-4">
                             <div className="card bg-dark text-white shadow text-center">
-                                <div className="card-body">Medias</div>
-                                <div className="card-subtitle mb-2 text-muted">Cantidad: 45</div>
+                                <div className="card-body">{Object.keys(categories)[3]}</div>
+                                <div className="card-subtitle mb-2 text-muted">Cantidad: {Object.values(categories)[3]}</div>
                             </div>
                         </div>
                     </div>
